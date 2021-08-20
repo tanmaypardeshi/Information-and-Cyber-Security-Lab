@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
     double encrypted, decrypted;
 
      // Generation of public and private key
-    double p = 3, q = 11;
+    double p = 3, q = 7;
     double n = p*q;
 
     double e = 2;
@@ -45,10 +45,15 @@ int main(int argc, char const *argv[])
         }
     }
 
-    double k = 2;
+    int k = 2;
 
     double d = (1 + (k*phi))/e;
 
+    cout<<"(e,n) = ("<<e<<", "<<n<<")"<<endl;
+    cout<<"(d,n) = ("<<d<<", "<<n<<")"<<endl;
+    cout<<"phi = "<<phi<<endl;
+
+    
     // Create a network socket
     network_socket = socket(AF_INET, SOCK_STREAM, 0);
 

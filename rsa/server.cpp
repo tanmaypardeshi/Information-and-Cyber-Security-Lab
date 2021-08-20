@@ -7,24 +7,11 @@
 using namespace std;
 #define PORT 8080
 
-int gcd(int a, int b)
-{
-    int temp;
-    while(1)
-    {
-        temp = a % b;
-        if(temp == 0)
-            return b;
-        a = b;
-        b = temp;
-    }
-}
-
 int main(int argc, char const *argv[])
 {
     double to_client = 89;
     double e, n, c;
-    
+
     // Create the server socket
     int server_socket, client_socket;
     server_socket = socket(AF_INET, SOCK_STREAM, 0);
@@ -41,32 +28,32 @@ int main(int argc, char const *argv[])
     // Call the listen function
     listen(server_socket, 5);
 
-    cout<<"Listening for clients\n";
+    cout << "Listening for clients\n";
 
     // Accept a client socket and send message to client
     client_socket = accept(server_socket, NULL, NULL);
 
     if (client_socket == -1)
     {
-        cout<<"\nCould not accept a client connection\n";
+        cout << "\nCould not accept a client connection\n";
     }
 
     recv(client_socket, &e, sizeof(double), 0);
-    
-    recv(client_socket, &n, sizeof(double), 0);
-    
-    cout<<"Original message from server is: "<<to_client<<endl;
 
-    cout<<"Public key is: ("<<e<<", "<<n<<")"<<endl;
+    recv(client_socket, &n, sizeof(double), 0);
+
+    cout << "Original message from server is: " << to_client << endl;
+
+    cout << "Public key is: (" << e << ", " << n << ")" << endl;
 
     c = pow(to_client, e);
     c = fmod(c, n);
 
-    cout<<"After encryption using client's public key, message is: "<<c<<endl;
+    cout << "After encryption using client's public key, message is: " << c << endl;
 
     send(client_socket, &c, sizeof(double), 0);
 
-    cout<<"Message sent to client"<<endl;
-    
+    cout << "Message sent to client" << endl;
+
     return 0;
 }
