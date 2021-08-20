@@ -9,7 +9,7 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    double to_client = 89;
+    double to_client = 12;
     double e, n, c;
 
     // Create the server socket
